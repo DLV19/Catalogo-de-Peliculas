@@ -1,0 +1,80 @@
+<div class="detail container py-5">
+
+  <!-- Botón de volver -->
+  <a routerLink="/movies" class="btn btn-outline-light btn-sm d-inline-flex align-items-center gap-1 mb-4 back">
+    <i class="bi bi-arrow-left-circle-fill"></i>
+    <span>Volver al catálogo</span>
+  </a>
+
+  <!-- Skeleton mientras carga -->
+  <ng-container *ngIf="loading(); else loadedTpl">
+    <div class="skeleton glass rounded-4 p-3 p-md-4">
+      <div class="row g-4 align-items-start">
+        <div class="col-12 col-md-4"><div class="ph poster"></div></div>
+        <div class="col-12 col-md-8">
+          <div class="ph title mb-3"></div>
+          <div class="ph line w-75 mb-2"></div>
+          <div class="ph line w-50 mb-4"></div>
+          <div class="ph para mb-2"></div>
+          <div class="ph para w-75 mb-2"></div>
+          <div class="ph para w-50"></div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <!-- Detalle cargado -->
+  <ng-template #loadedTpl>
+    <ng-container *ngIf="movie(); else errorTpl">
+      <div class="glass rounded-4 p-3 p-md-4 shadow-lg">
+        <div class="row g-4 align-items-start">
+
+          <!--Poster -->
+          <div class="col-12 col-md-4">
+            <div class="poster-wrap rounded-4 overflow-hidden shadow">
+              <img
+                [src]="poster(movie()?.title, movie()?.cover)"
+                [alt]="movie()?.title"
+                class="poster-img"
+                loading="lazy"
+              />
+            </div>
+          </div>
+
+          <!--Información -->
+          <div class="col-12 col-md-8">
+            <h1 class="title display-6 fw-semibold d-flex align-items-center gap-2">
+              <i class="bi bi-camera-reels-fill text-danger"></i>
+              {{ movie()?.title }}
+              <span class="badge bg-gradient text-light">{{ movie()?.year }}</span>
+            </h1>
+
+            <p class="lead text-white-50 mt-3" *ngIf="movie()?.synopsis; else noSinopsis">
+              {{ movie()?.synopsis }}
+            </p>
+            <ng-template #noSinopsis>
+              <p class="text-white-50">Sinopsis no disponible.</p>
+            </ng-template>
+
+            <!-- Botones -->
+            <div class="actions d-flex flex-wrap gap-3 mt-4">
+              <a routerLink="/movies" class="btn btn-gradient-primary d-inline-flex align-items-center gap-2">
+                <i class="bi bi-collection-play"></i> Ver más películas
+              </a>
+              <button class="btn btn-outline-light d-inline-flex align-items-center gap-2" (click)="share()">
+                <i class="bi bi-share-fill"></i> Compartir
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </ng-template>
+
+  <!--Error por si falla algo. -->
+  <ng-template #errorTpl>
+    <div class="alert alert-danger">
+      {{ error() || 'No se pudo cargar la película.' }}
+    </div>
+  </ng-template>
+</div>

@@ -1,0 +1,106 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  color: #f8f9fa;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Tarjeta principal */
+.glass {
+  background: rgba(25, 25, 35, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px); /* Safari */
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 1rem;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+  width: 100%;
+  max-width: 600px;
+  animation: fadeInUp 0.6s ease;
+}
+
+/* Encabezado */
+h3 {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #fff;
+  text-shadow: 0 0 6px rgba(255,255,255,0.15);
+}
+
+/* Labels */
+.form-label {
+  font-weight: 500;
+  color: #cfd8dc;
+}
+
+/* Inputs / selects / textarea */
+.form-control,
+.form-select,
+textarea {
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 0.6rem;
+  transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control::placeholder,
+textarea::placeholder {
+  color: rgba(255,255,255,0.55);
+}
+
+.form-control:focus,
+.form-select:focus,
+textarea:focus {
+  background: rgba(255,255,255,0.12);
+  border-color: #42a5f5;
+  box-shadow: 0 0 10px rgba(66,165,245,0.25);
+  color: #fff;
+}
+
+.form-control:disabled,
+.form-select:disabled,
+textarea:disabled {
+  opacity: 0.7;
+}
+
+/* Botones */
+.btn-primary {
+  background: linear-gradient(90deg, #1976d2, #42a5f5) !important; /* override BS */
+  border: 0 !important;
+  color: #fff !important;
+  box-shadow: 0 6px 18px rgba(66,165,245,0.25);
+  transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-primary:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+}
+
+.btn-outline-secondary {
+  color: #ccc;
+  border-color: rgba(255,255,255,0.2);
+}
+.btn-outline-secondary:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.btn-outline-danger {
+  border-color: rgba(255,0,0,0.4);
+  color: #ff6b6b;
+}
+.btn-outline-danger:hover {
+  background: rgba(255,0,0,0.15);
+}
+
+/* Animación de entrada (con reduce motion) */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .glass { animation: none; }
+}

@@ -1,0 +1,66 @@
+
+/*  Gradiente azul moderno para botones */
+.btn-gradient-primary {
+  background: linear-gradient(90deg, #007bff, #00c6ff);
+  border: none;
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+}
+
+.btn-gradient-primary:hover {
+  filter: brightness(1.15);
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 195, 255, 0.5);
+}
+
+
+/* Efectos para el botón “volver” */
+.back {
+  border-color: rgba(0, 195, 255, 0.5);
+  color: #00c6ff;
+  transition: all 0.25s ease;
+}
+.back:hover {
+  color: #fff;
+  background: linear-gradient(90deg, #007bff, #00c6ff);
+  border-color: transparent;
+  transform: translateX(-2px);
+}
+
+
+/* Íconos */
+.bi {
+  vertical-align: middle;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.bi:hover {
+  transform: scale(1.1);
+}
+
+/*  Poster */
+.poster-wrap {
+  aspect-ratio: 2 / 3;
+  background: #111;
+  transition: transform .25s ease, filter .25s ease;
+}
+.poster-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.poster-wrap:hover {
+  transform: scale(1.02);
+  filter: brightness(1.08);
+}
+
+/*Efecto de Fondo dinámico */
+:host {
+  background: radial-gradient(circle at top left, #1c1c3c, #0b0b1b 80%);
+  color: #f8f9fa;
+  min-height: 100vh;
+  display: block;
+  padding-bottom: 5rem;
+}

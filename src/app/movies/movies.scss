@@ -1,0 +1,124 @@
+/* ===== Fondo y layout general ===== */
+:host {
+  display: block;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  background-size: 300% 300%;
+  animation: gradientMove 10s ease infinite;
+  color: #f8f9fa;
+  overflow-x: hidden; /* evita la línea blanca lateral */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :host { animation: none; }
+}
+
+@keyframes gradientMove {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ===== Navbar glass ===== */
+.navbar {
+  background: rgba(0,0,0,0.25);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-link:hover { color: #00bfff !important; }
+
+.navbar-brand i {
+  color: #ff5252;
+  font-size: 1.5rem;
+  transition: transform .3s ease, color .3s ease;
+}
+.navbar-brand:hover i { transform: rotate(-10deg) scale(1.1); color: #ff7b00; }
+
+/* Botón primario */
+.btn-gradient-primary{
+  background: linear-gradient(90deg, #1976d2, #42a5f5);
+  border: 0; color: #fff;
+  box-shadow: 0 6px 18px rgba(66,165,245,.35);
+  transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+}
+.btn-gradient-primary:hover{
+  filter: brightness(1.06); transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(66,165,245,.45);
+}
+.btn-gradient-primary:active{
+  transform: translateY(0);
+  box-shadow: 0 3px 10px rgba(66,165,245,.35);
+}
+.navbar .btn-gradient-primary{
+  padding: .45rem .85rem; font-weight: 600; border-radius: .65rem;
+}
+
+/* ===== Cards del catálogo ===== */
+.card {
+  background: #161a23;      /* mejor contraste sobre el bg */
+  border: none;
+  border-radius: 14px;
+  overflow: hidden;
+  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(0,0,0,.35), 0 0 25px rgba(255,255,255,0.06);
+  filter: brightness(1.03);
+}
+
+.card-img-top {
+  width: 100%;
+  aspect-ratio: 2 / 3;      /* 500x750 vibe */
+  object-fit: cover;
+}
+
+/* Título y año */
+.card-title {
+  font-weight: 600;
+  line-height: 1.25;
+  min-height: 2.4em;        /* 2 líneas aprox para uniformidad */
+}
+
+/* Sinopsis: clamp con fallback */
+.card-body p {
+  --lines: 3;
+  min-height: calc(1em * var(--lines) + .75rem);  /* mantiene altura constante */
+  margin-bottom: 0;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--lines);
+  overflow: hidden;
+}
+
+/* Footer de acciones */
+.card-footer {
+  background: transparent;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+/* ===== utilidades ===== */
+.page-offset-top{ padding-top: 84px; }
+
+/* ===== Footer (si lo usas) ===== */
+.footer {
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: 'Poppins', sans-serif;
+}
+.footer p { margin: 0; line-height: 1.6; }
+.footer img { vertical-align: middle; filter: drop-shadow(0 0 4px rgba(255,255,255,0.3)); }
+.footer i { vertical-align: middle; }
+
+.card-footer .btn-primary {
+  background: linear-gradient(90deg, #1976d2, #42a5f5);
+  border: 0;
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(66,165,245,.25);
+}
+.card-footer .btn-primary:hover { filter: brightness(1.06); }

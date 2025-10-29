@@ -1,0 +1,100 @@
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-transparent px-4 py-3">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold text-light d-flex align-items-center gap-2" routerLink="/">
+      <i class="bi bi-camera-reels-fill text-danger fs-4"></i> Catálogo
+    </a>
+
+    <div class="ms-auto d-none d-lg-flex">
+      <a routerLink="/movies/new" class="btn btn-gradient-primary">
+        <i class="bi bi-plus-circle"></i> Nueva
+      </a>
+    </div>
+
+    <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <i class="bi bi-house-door me-1"></i> Inicio
+          </a>
+        </li>
+        <li class="nav-item"><a class="nav-link" routerLink="/movies" routerLinkActive="active"><i class="bi bi-collection-play me-1"></i> Populares</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/genres" routerLinkActive="active"><i class="bi bi-film me-1"></i> Géneros</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/contact" routerLinkActive="active"><i class="bi bi-envelope me-1"></i> Contacto</a></li>
+
+        <!-- Botón visible en MOBILE -->
+        <li class="nav-item d-lg-none mt-3">
+          <a routerLink="/movies/new" class="btn btn-gradient-primary w-100">
+            <i class="bi bi-plus-circle"></i> Nueva
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- CONTENIDO -->
+<div class="container py-4">
+
+  <!-- Loading -->
+  <div *ngIf="loading()" class="text-center text-secondary py-5">
+    <div class="spinner-border" role="status"></div>
+    <div class="mt-2">Cargando catálogo…</div>
+  </div>
+
+  <!-- Error -->
+  <div *ngIf="!loading() && error()" class="alert alert-danger">
+    {{ error() }}
+  </div>
+
+  <!-- Empty -->
+  <div *ngIf="!loading() && !error() && movies().length === 0" class="text-center text-muted py-5">
+    <i class="bi bi-emoji-frown fs-1 d-block mb-2"></i>
+    No hay películas aún. <a routerLink="/movies/new">Crea la primera</a>.
+  </div>
+
+  <!-- Grid de películas -->
+  <div *ngIf="!loading() && !error() && movies().length > 0" class="row g-3">
+    <div class="col-6 col-md-4 col-lg-3" *ngFor="let m of movies()">
+      <div class="card h-100 bg-dark text-light border-0 shadow-sm">
+        <!-- Imagen -->
+        <img class="card-img-top" [src]="m.cover || placeholder(m.title)" [alt]="m.title" />
+
+        <!-- Info -->
+        <div class="card-body">
+          <h6 class="card-title mb-1" [title]="m.title">{{ m.title }}</h6>
+          <small class="text-secondary d-block mb-2">{{ m.year }}</small>
+
+          <!-- Sinopsis -->
+          <p class="text-muted small mb-0" *ngIf="m.synopsis">
+            {{ m.synopsis.length > 80 ? (m.synopsis | slice:0:80) + '…' : m.synopsis }}
+          </p>
+        </div>
+
+        <!-- Acciones -->
+<div class="card-footer d-flex gap-2 bg-transparent border-0">
+  <!-- Ver (detalle) -->
+  <a [routerLink]="['/movies', m.id]" class="btn btn-sm btn-primary flex-fill">
+    Ver
+  </a>
+
+  <!-- Editar (form de edición) -->
+  <a [routerLink]="['/movies', m.id, 'edit']" class="btn btn-sm btn-outline-light flex-fill">
+    Editar
+  </a>
+
+  <!-- Eliminar -->
+  <button class="btn btn-sm btn-outline-danger"
+          (click)="deleteFromList(m.id)"
+          [disabled]="loading()">
+    Eliminar
+  </button>
+</div>
+
+
+</div>
